@@ -7,6 +7,8 @@ import org.example.bankingapi.dto.UpdateAccountRequest;
 import org.example.bankingapi.entity.Account;
 import org.example.bankingapi.exception.AccountNotFoundException;
 import org.example.bankingapi.exception.DuplicateAccountException;
+import org.example.bankingapi.security.CustomUserDetailsService;
+import org.example.bankingapi.security.JwtAuthenticationFilter;
 import org.example.bankingapi.service.AccountService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -31,6 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AccountController.class)
+@org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc(addFilters = false)
 class AccountControllerTest {
 
     @Autowired
@@ -41,6 +44,12 @@ class AccountControllerTest {
 
     @MockBean
     private AccountService accountService;
+
+    @MockBean
+    private CustomUserDetailsService customUserDetailsService;
+
+    @MockBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     private static final Long ACCOUNT_ID = 1L;
     private static final String ACCOUNT_NUMBER = "ACC001";

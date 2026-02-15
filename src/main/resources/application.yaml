@@ -1,3 +1,8 @@
+app:
+  jwt:
+    secret: banking-api-secret-key-min-256-bits-required-for-hs256
+    expiration-ms: 86400000  # 24 hours
+
 spring:
   application:
     name: banking-api
